@@ -1,3 +1,4 @@
+import { Route,Routes } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
 import { FilterProdact } from "./Components/FilterProduct";
@@ -122,7 +123,8 @@ function App() {
         handleFilterrate={handleFilterrate}
         handleCategory={handleCategory}
       />
-      <ProductList
+      <Routes>
+      <Route path='/' element={<ProductList
         list={category=='All'?
           list.filter(
           (el) =>
@@ -135,14 +137,15 @@ function App() {
         )
 }
         handelAdd={handelAdd}
-      />
-      <Panier
+      />} />
+      <Route path='/panier'  element={<Panier
         panier={panier}
         total={total}
         increament={increament}
         decreament={decreament}
         handleDelete={handleDelete}
-      />
+      />} />
+      </Routes>
     </div>
   );
 }

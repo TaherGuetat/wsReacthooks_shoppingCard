@@ -4,6 +4,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { FcHome } from "react-icons/fc";
+import { BsFillCartCheckFill } from "react-icons/bs"
+import {Link} from 'react-router-dom'
 
 import React from 'react'
 
@@ -16,6 +19,7 @@ export const FilterProdact = ({handleFilterbn,handleFilterrate,handleCategory}) 
   };
   return (
     <div style={{display:'flex',justifyContent:'space-around'}}>
+      <Link to='/'><FcHome/></Link>
       <input type="text" name="" id="" onChange={(e)=>handleFilterbn(e.target.value)}/>
       <Rating
         name="simple-controlled"
@@ -43,6 +47,8 @@ export const FilterProdact = ({handleFilterbn,handleFilterrate,handleCategory}) 
         </Select>
       </FormControl>
     </Box>
+    <Link to='/panier'><BsFillCartCheckFill/></Link>
+    
     </div>
   )
 }
