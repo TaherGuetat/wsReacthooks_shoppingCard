@@ -5,6 +5,9 @@ import { FilterProdact } from "./Components/FilterProduct";
 import { Panier } from "./Components/Panier";
 import ProductList from "./Components/ProductList";
 import { products } from "./data";
+import { ProductDetails } from "./Components/ProductDetails";
+import { AddProduct } from "./Components/AddProduct";
+import { EditProduct } from "./Components/EditProduct";
 
 function App() {
   const [panier, setPanier] = useState([]);
@@ -13,6 +16,18 @@ function App() {
   const [filterbn, setFilterbn] = useState("");
   const [value, setValue] = useState(0);
   const [category, setCategory] = useState("All");
+
+  const handleAddProduct=(newProduct)=>{
+    setList([newProduct,...list])
+    
+  }
+  const handleEdit=(newProduct,id)=>{
+    setList(list.map(el=>el.id == id? {...newProduct}:el))
+    
+  }
+  const handleDeleteProd=(id)=>{
+setList(list.filter(el=>el.id != id))
+  }
 
   const handleCategory = (value) => {
     setCategory(value);
@@ -124,7 +139,7 @@ function App() {
         handleCategory={handleCategory}
       />
       <Routes>
-      <Route path='/' element={<ProductList
+      <Route path='/' element={<ProductList handleDeleteProd={handleDeleteProd}
         list={category=='All'?
           list.filter(
           (el) =>
@@ -145,6 +160,9 @@ function App() {
         decreament={decreament}
         handleDelete={handleDelete}
       />} />
+      <Route path="/details/:id" element={<ProductDetails list={list} handelAdd={handelAdd}/>}/>
+      <Route path="/add" element={<AddProduct handleAddProduct={handleAddProduct}/>}/>
+      <Route path="/edit/:id" element={<EditProduct handleEdit={handleEdit} list={list}/>}/>
       </Routes>
     </div>
   );
